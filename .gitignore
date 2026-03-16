@@ -4,8 +4,5 @@
 # Allow .jl files
 !*.jl
 
-# Allow .sh files
-!*.sh
-
 # Allow .gitignore itself
 !.gitignore
