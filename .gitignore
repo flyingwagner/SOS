@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# Allow .jl files
+!*.jl
+
+# Allow .gitignore itself
+!.gitignore
