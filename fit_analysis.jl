@@ -76,8 +76,8 @@ for sigma in sigma_list
         println(io, "# All fits go from L_min to L=512")
         println(io)
 
-        # ---------- W² ~ a·ln(L) + b ----------
-        println(io, "## W2 ~ a*ln(L) + b")
+        # ---------- M² ~ a·ln(L) + b ----------
+        println(io, "## M2 ~ a*ln(L) + b")
         write_header_log(io)
         for L_min in L_min_list
             Ls = filter(L -> L >= L_min, L_list_all)

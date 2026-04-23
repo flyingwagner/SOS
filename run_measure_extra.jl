@@ -83,8 +83,9 @@ thermalize!(h, L, K, sigma; therm_sweeps=THERM, use_sw=USE_SW)
 # 累积 histogram
 hist_counts = zeros(Float64, NBINS)
 
-# 累积全 k 的 |h_k|²（对所有 k 求平均）
+# 累积全 k 的 |h_k|²（对所有 k 求平均）及 |h_k|⁴（用于误差估计）
 hk_power_sum = zeros(Float64, L, L)
+hk_power_sq_sum = zeros(Float64, L, L)   # Σ (|h_k|²)² for stderr
 
 println("--- 测量中 ($MEASURE sweeps) ---")
 for i in 1:MEASURE
@@ -96,9 +97,11 @@ for i in 1:MEASURE
     # 累积 |h_i - h_j| histogram
     measure_height_diff_histogram!(hist_counts, h, L, BIN_WIDTH)
 
-    # 累积 |h_k|²
+    # 累积 |h_k|² 及 (|h_k|²)²
     hk = measure_hk_full(h, L)
-    hk_power_sum .+= abs2.(hk)
+    hk2_snapshot = abs2.(hk)
+    hk_power_sum .+= hk2_snapshot
+    hk_power_sq_sum .+= hk2_snapshot .^ 2
 
     if i % 10000 == 0
         println("  sweep $i / $MEASURE")
@@ -108,6 +111,9 @@ end
 # 归一化
 hist_counts ./= MEASURE
 hk_power_avg = hk_power_sum ./ MEASURE
+hk_power_sq_avg = hk_power_sq_sum ./ MEASURE
+# 标准误差: stderr = sqrt((<x²> - <x>²) / N)
+hk_power_err = sqrt.(max.(hk_power_sq_avg .- hk_power_avg .^ 2, 0.0) ./ MEASURE)
 
 # 提取 bin 中心
 bin_centers = [(i - 0.5) * BIN_WIDTH for i in 1:NBINS]
@@ -115,7 +121,7 @@ bin_centers = [(i - 0.5) * BIN_WIDTH for i in 1:NBINS]
 jldsave(out_file;
     L, sigma, K,
     bin_centers, hist_counts, BIN_WIDTH,
-    hk_power_avg,
+    hk_power_avg, hk_power_err,
 )
 println("\n========== 结果 ==========")
 println("  histogram: $(sum(hist_counts)) 条键/sweep (理论值 $(2*L*L))")

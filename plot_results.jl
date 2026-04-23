@@ -30,22 +30,22 @@ get_chip(L, sigma) = data["L$(L)_s$(sigma)"]["chip_mean"], data["L$(L)_s$(sigma)
 scipy_stats = pyimport("scipy.stats")
 
 # ==========================================
-# 图1：W²(L) 有限尺寸标度
+# 图1：M²(L) 有限尺寸标度
 # ==========================================
 fig1, ax1 = subplots(figsize=(6, 5))
-ax1.set_title("Surface Roughness \$W^2(L)\$")
+ax1.set_title("Surface Roughness \$\\mathrm{M}^2(L)\$")
 ax1.set_xlabel("System Size \$L\$")
-ax1.set_ylabel("\$W^2\$")
+ax1.set_ylabel("\$\\mathrm{M}^2\$")
 ax1.set_xscale("log")
 
-println("\n--- FSS 拟合结果 (W² ~ a·ln(L) + b) ---")
+println("\n--- FSS 拟合结果 (M² ~ a·ln(L) + b) ---")
 for sigma in sigma_list
     W2_vals = [get_W2(L, sigma)[1] for L in L_list]
     W2_errs = [get_W2(L, sigma)[2] for L in L_list]
     ax1.errorbar(L_list, W2_vals, yerr=W2_errs, marker="o", label="\$\\sigma=$(sigma)\$", capsize=4)
 
     slope, intercept, r, _, stderr = scipy_stats.linregress(log.(L_list), W2_vals)
-    println("  σ=$sigma : W² ~ $(round(slope,digits=4))·ln(L) + $(round(intercept,digits=4))  (R²=$(round(r^2,digits=4)))")
+    println("  σ=$sigma : M² ~ $(round(slope,digits=4))·ln(L) + $(round(intercept,digits=4))  (R²=$(round(r^2,digits=4)))")
 end
 ax1.set_xticks(sort(L_list))
 ax1.get_xaxis().set_major_formatter(ticker.ScalarFormatter())

@@ -1,8 +1,28 @@
-# Ignore everything
+# Ignore everything by default
 *
 
-# Allow .jl files
+# Allow source code and docs
 !*.jl
+!*.md
+!*.sh
+
+# Allow report directory with selected contents
+!report/
+report/*
+!report/*.tex
+!report/*.pdf
+!report/*.md
 
 # Allow .gitignore itself
 !.gitignore
+
+# Explicitly exclude data, figures, and LaTeX build artifacts
+data/
+data_cg/
+data_extra/
+figures/
+*.jld2
+*.aux
+*.log
+*.out
+*.synctex.gz
