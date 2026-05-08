@@ -13,6 +13,10 @@ report/*
 !report/*.pdf
 !report/*.md
 
+# Allow doc directory (markdown notes)
+!doc/
+!doc/*.md
+
 # Allow .gitignore itself
 !.gitignore
 
@@ -20,6 +24,7 @@ report/*
 data/
 data_cg/
 data_extra/
+data3d/
 figures/
 *.jld2
 *.aux
