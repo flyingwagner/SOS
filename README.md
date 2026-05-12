@@ -59,6 +59,7 @@ $L \in \{4,8,16,32,64,128,256,512\}$，$\sigma \in \{0.5, 1.0, 2.0, 4.0\}$。Coa
 | `doc/simulation.md`         | 2D 模拟流程、观测量定义、运行参数说明。 |
 | `doc/further_simulations.md`| 待补跑的 $(L,\sigma)$ 组合列表（`hk_power_err` 字段补齐）。 |
 | `doc/analysis_3d.md`        | 3D 平整相 $M^2(L)$ 标度分析、$1/L$ 外推、Gaussian 不动点 RG 一致性论证。 |
+| `doc/continuum_rg.md`       | 格点 → 连续场推导；$\int\|\nabla h\|^\sigma$ 的朴素 scaling、它失败的原因，以及 RG／变分论证给出由 $d$ 决定的相图。 |
 
 ---
 
