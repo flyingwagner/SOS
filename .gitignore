@@ -17,15 +17,42 @@ report/*
 !doc/
 !doc/*.md
 
+# Allow figures/ but only those actually used by report/ and doc/
+!figures/
+figures/*
+!figures/W2_scaling.pdf
+!figures/chi_scaling.pdf
+!figures/structure_factor_full_L512.pdf
+!figures/M2_scaling_3d.pdf
+!figures/histogram/
+figures/histogram/*
+!figures/histogram/hist_L512_s0.5.pdf
+!figures/histogram/hist_L512_s1.0.pdf
+!figures/histogram/hist_L512_s2.0.pdf
+!figures/histogram/hist_L512_s4.0.pdf
+!figures/coarse_grain/
+figures/coarse_grain/*
+!figures/coarse_grain/kurtosis_vs_b_s0.5.pdf
+!figures/coarse_grain/kurtosis_vs_b_s1.0.pdf
+!figures/coarse_grain/kurtosis_vs_b_s2.0.pdf
+!figures/coarse_grain/kurtosis_vs_b_s4.0.pdf
+!figures/coarse_grain/hist_levels_L1024_s0.5.pdf
+!figures/coarse_grain/hist_levels_L1024_s1.0.pdf
+!figures/coarse_grain/hist_levels_L1024_s2.0.pdf
+!figures/coarse_grain/hist_levels_L1024_s4.0.pdf
+!figures/coarse_grain/Sk_levels_L1024_s0.5.pdf
+!figures/coarse_grain/Sk_levels_L1024_s1.0.pdf
+!figures/coarse_grain/Sk_levels_L1024_s2.0.pdf
+!figures/coarse_grain/Sk_levels_L1024_s4.0.pdf
+
 # Allow .gitignore itself
 !.gitignore
 
-# Explicitly exclude data, figures, and LaTeX build artifacts
+# Explicitly exclude data and LaTeX build artifacts
 data/
 data_cg/
 data_extra/
 data3d/
-figures/
 *.jld2
 *.aux
 *.log
